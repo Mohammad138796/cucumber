@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ربات همه‌کاره خیار با قابلیت‌های هوش مصنوعی، دانلود، VPN، ابزارهای کاربردی و...">
+    <meta name="keywords" content="ربات تلگرام,هوش مصنوعی,دانلود از اینستاگرام,وی پی ان رایگان,تبدیل متن به صدا">
+    <title>ربات خیار | همه‌کاره تلگرام با هوش مصنوعی و ابزارهای کاربردی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #25D366;
+            --primary-light: #5DF58F;
+            --primary-dark: #128C7E;
+            --primary-darker: #075E54;
+            --accent: #FFD700;
+            --accent-dark: #FFC000;
+            --dark: #202124;
+            --darker: #121212;
+            --light: #dcf8c6;
+            --lighter: #f5fdf0;
+            --gray: #f1f3f4;
+            --text: #3c4043;
+            --text-light: #5f6368;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-dark));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--lighter);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        /* هدر جدید با افکت پارالاکس و ویدیو بکگراند */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 100px 0 180px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            clip-path: ellipse(120% 100% at 50% 0%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo-icon {
+            font-size: 4.5rem;
+            margin-left: 20px;
+            animation: bounce 3s infinite;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+        }
+        
+        .logo-text {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to right, white, var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: var(--transition);
+        }
+        
+        .btn:hover::before {
+            transform: translateX(0);
+        }
+        
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: var(--primary-darker);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 200, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+        
+        .btn-icon {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 20px 30px;
+            border-radius: 15px;
+            min-width: 180px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, white, var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* بخش ویژگی‌ها */
+        .features {
+            padding: 120px 0 80px;
+            position: relative;
+            margin-top: -80px;
+        }
+        
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path fill="%23f5fdf0" d="M0,0L48,16C96,32,192,64,288,80C384,96,480,96,576,80C672,64,768,32,864,32C960,32,1056,64,1152,80C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 80px;
+            color: var(--primary-darker);
+            position: relative;
+            font-weight: 800;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: 5px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-card:hover::before {
+            width: 100%;
+            opacity: 0.05;
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        
+        .feature-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .feature-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+        
+        .feature-desc {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+        
+        .feature-badge {
+            display: inline-block;
+            background: rgba(37, 211, 102, 0.1);
+            color: var(--primary);
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        
+        /* بخش دمو */
+        .demo {
+            padding: 120px 0;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="%23f5fdf0" opacity="0.3" d="M0,0 L100,0 L100,25 C75,50 50,25 0,50 Z"></path></svg>');
+            background-size: cover;
+            opacity: 0.5;
+        }
+        
+        .demo-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap-reverse;
+            gap: 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .demo-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .demo-title {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--primary-darker);
+            font-weight: 800;
+        }
+        
+        .demo-desc {
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .demo-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        
+        .demo-features li {
+            padding: 12px 0;
+            position: relative;
+            padding-right: 30px;
+        }
+        
+        .demo-features li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            top: 12px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .demo-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .phone-mockup {
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            border: 15px solid var(--dark);
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            display: block;
+            background: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .screen-content {
+            padding: 20px;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        .screen-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .screen-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-darker);
+        }
+        
+        .screen-time {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .bot-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .welcome-message {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .menu-button {
+            display: block;
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .menu-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* بخش قیمت (رایگان) */
+        .pricing {
+            padding: 120px 0;
+            background: var(--gradient);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"></path></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .pricing .section-title {
+            color: white;
+        }
+        
+        .pricing .section-title::after {
+            background: var(--gradient-accent);
+        }
+        
+        .price-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: var(--shadow-md);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-accent);
+        }
+        
+        .price-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .price-amount {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            line-height: 1;
+        }
+        
+        .price-amount::after {
+            content: 'رایگان!';
+            position: absolute;
+            top: -15px;
+            right: -40px;
+            background: var(--accent);
+            color: var(--primary-darker);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            transform: rotate(15deg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .price-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        
+        .price-features li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-right: 30px;
+        }
+        
+        .price-features li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            top: 15px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        /* بخش نظرات کاربران */
+        .testimonials {
+            padding: 120px 0;
+            background-color: var(--lighter);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 5rem;
+            color: rgba(37, 211, 102, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info {
+            flex: 1;
+        }
+        
+        .author-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .author-title {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        /* بخش سوالات متداول */
+        .faq {
+            padding: 120px 0;
+            background: white;
+        }
+        
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .accordion-item {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .accordion-header {
+            background: var(--lighter);
+            padding: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .accordion-header:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .accordion-header.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .accordion-header.active::after {
+            content: '-';
+        }
+        
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .accordion-content-inner {
+            padding: 20px 0;
+        }
+        
+        /* فوتر */
+        footer {
+            background: var(--darker);
+            color: white;
+            padding: 100px 0 50px;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+        }
+        
+        .footer-about {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-right: 10px;
+        }
+        
+        .footer-links a::before {
+            content: '→';
+            margin-left: 10px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover::before {
+            opacity: 1;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .newsletter {
+            margin-top: 25px;
+        }
+        
+        .newsletter-input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* دکمه بازگشت به بالا */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            cursor: pointer;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* حالت تاریک */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--darker);
+                color: #e0e0e0;
+            }
+            
+            .features, .demo, .faq {
+                background-color: #1e1e1e;
+            }
+            
+            .feature-card, .testimonial-card, .accordion-item {
+                background-color: #2d2d2d;
+                color: #e0e0e0;
+                border-color: #333;
+            }
+            
+            .feature-title, .demo-title, .accordion-header {
+                color: #ffffff;
+            }
+            
+            .feature-desc, .demo-desc, .price-features li, .testimonial-text, .accordion-content {
+                color: #b0b0b0;
+            }
+            
+            .demo::before {
+                opacity: 0.1;
+            }
+            
+            .accordion-header {
+                background: #252525;
+            }
+            
+            .accordion-header:hover {
+                background: var(--primary);
+            }
+        }
+        
+        /* رسپانسیو */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 40px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero {
+                padding: 80px 0 150px;
+            }
+            
+            .logo-text {
+                font-size: 3rem;
+            }
+            
+            .logo-icon {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0 120px;
+                clip-path: ellipse(150% 100% at 50% 0%);
+            }
+            
+            .logo-text {
+                font-size: 2.5rem;
+            }
+            
+            .logo-icon {
+                font-size: 3rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+            
+            .feature-card {
+                padding: 30px;
+            }
+            
+            .feature-icon {
+                font-size: 3rem;
+            }
+            
+            .feature-title {
+                font-size: 1.4rem;
+            }
+            
+            .stats {
+                gap: 20px;
+            }
+            
+            .stat-item {
+                min-width: 140px;
+                padding: 15px 20px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero {
+                padding: 50px 0 100px;
+            }
+            
+            .logo-text {
+                font-size: 2rem;
+            }
+            
+            .logo-icon {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                left: 20px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر جدید با افکت پارالاکس -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="logo fade-in">
+                <span class="logo-icon">🥒</span>
+                <h1 class="logo-text">ربات خیار</h1>
+            </div>
+            <p class="tagline fade-in delay-1">همه‌چیز در یک ربات! از هوش مصنوعی پیشرفته تا دانلود از تمامی شبکه‌های اجتماعی و ابزارهای کاربردی روزمره</p>
+            <div class="cta-buttons fade-in delay-2">
+                <a href="https://t.me/cucumbernumbot" class="btn btn-primary">
+                    <span class="btn-icon">🚀</span>
+                    شروع کنید
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <span class="btn-icon">✨</span>
+                    ویژگی‌ها
+                </a>
+            </div>
+            
+            <div class="stats fade-in delay-3">
+                <div class="stat-item">
+                    <div class="stat-number">+50</div>
+                    <div class="stat-label">قابلیت مختلف</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">رایگان</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">پشتیبانی</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- بخش ویژگی‌ها -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title fade-in">چرا ربات خیار؟</h2>
+            <p class="section-subtitle fade-in delay-1">ربات خیار با ترکیب هوش مصنوعی پیشرفته و ابزارهای کاربردی، تمام نیازهای شما در تلگرام را برطرف می‌کند</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">هوش مصنوعی پیشرفته</h3>
+                    <p class="feature-desc">چت هوشمند با مدل‌های مختلف (GPT-4.1، Mistral، Phi-4 و...)، ساخت تصاویر خیره‌کننده با هوش مصنوعی، تبدیل متن به صوت با کیفیت بالا و بسیاری قابلیت‌های دیگر</p>
+                    <span class="feature-badge">جدیدترین مدل‌ها</span>
+                </div>
+                
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">⬇️</div>
+                    <h3 class="feature-title">دانلود از همه جا</h3>
+                    <p class="feature-desc">دانلود از اینستاگرام، یوتیوب، آپارات، تیک‌تاک، فیسبوک، اسپاتیفای، ساندکلاد و ده‌ها سایت دیگر فقط با یک کلیک و بدون محدودیت</p>
+                    <span class="feature-badge">پرطرفدار</span>
+                </div>
+                
+                <div class="feature-card fade-in delay-3">
+                    <div class="feature-icon">🧰</div>
+                    <h3 class="feature-title">جعبه ابزار کامل</h3>
+                    <p class="feature-desc">تبدیل فایل، ساخت گیف، فال حافظ، مترجم چندزبانه، ساخت ویس، انکد/دیکد متن، ساخت فونت، تاریخ و ده‌ها ابزار کاربردی دیگر</p>
+                </div>
+                
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">اینترنت آزاد</h3>
+                    <p class="feature-desc">دسترسی به VPN و پروکسی رایگان برای عبور از فیلترینگ بدون نیاز به نصب برنامه اضافی. کانفیگ SSTP و پروکسی با یک کلیک</p>
+                    <span class="feature-badge">بدون محدودیت</span>
+                </div>
+                
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">🕵️</div>
+                    <h3 class="feature-title">مزاحم‌یاب حرفه‌ای</h3>
+                    <p class="feature-desc">شناسایی شماره‌های مزاحم، جستجوی شماره با یوزرنیم یا ID عددی و انجام کارهای بانکی به ساده‌ترین شکل ممکن</p>
+                </div>
+                
+                <div class="feature-card fade-in delay-3">
+                    <div class="feature-icon">🎁</div>
+                    <h3 class="feature-title">کاملاً رایگان</h3>
+                    <p class="feature-desc">همه‌چیز رایگان و بدون هیچ محدودیتی در دسترس شماست. بدون تبلیغات آزاردهنده و بدون نیاز به پرداخت هزینه!</p>
+                    <span class="feature-badge">ویژه</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- بخش دمو -->
+    <section class="demo">
+        <div class="container">
+            <div class="demo-content">
+                <div class="demo-text fade-in">
+                    <h2 class="demo-title">تجربه کاربری بی‌نظیر در تلگرام</h2>
+                    <p class="demo-desc">ربات خیار با رابط کاربری ساده و روان طراحی شده تا بدون نیاز به آموزش خاصی بتوانید از تمامی قابلیت‌های آن استفاده کنید. منوهای طبقه‌بندی شده و دسترسی سریع به تمامی ابزارها.</p>
+                    
+                    <ul class="demo-features">
+                        <li>منوی هوشمند و دسته‌بندی شده</li>
+                        <li>راهنمای کامل برای هر بخش</li>
+                        <li>پشتیبانی 24 ساعته</li>
+                        <li>به‌روزرسانی مداوم قابلیت‌ها</li>
+                        <li>سرورهای پرسرعت و بدون محدودیت</li>
+                    </ul>
+                    
+                    <div class="cta-buttons">
+                        <a href="https://t.me/cucumbernumbot" class="btn btn-primary pulse">
+                            <span class="btn-icon">🤖</span>
+                            شروع مکالمه
+                        </a>
+                    </div>
+                </div>
+                <div class="demo-image fade-in delay-1">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="screen-content">
+                                <div class="screen-header">
+                                    <div class="screen-title">ربات خیار</div>
+                                    <div class="screen-time">14:30</div>
+                                </div>
+                                
+                                <div class="bot-avatar">
+                                    🥒
+                                </div>
+                                
+                                <div class="welcome-message">
+                                    به ربات همه‌کاره خیار خوش آمدید! لطفا یکی از گزینه‌های زیر را انتخاب کنید:
+                                </div>
+                                
+                                <a href="#" class="menu-button">بخش هوش مصنوعی 🤖</a>
+                                <a href="#" class="menu-button">بخش دانلودر ✨</a>
+                                <a href="#" class="menu-button">جعبه ابزار 🧰</a>
+                                <a href="#" class="menu-button">پشتیبانی ☎</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- بخش قیمت (رایگان) -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title fade-in">هزینه استفاده</h2>
+            <p class="section-subtitle fade-in delay-1">همه قابلیت‌های ربات خیار به صورت کاملا رایگان در اختیار شما قرار دارد</p>
+            
+            <div class="price-card fade-in delay-2">
+                <h3 class="price-title">پلن ویژه</h3>
+                <div class="price-amount">0</div>
+                <ul class="price-features">
+                    <li>دسترسی نامحدود به تمامی قابلیت‌های ربات</li>
+                    <li>بدون محدودیت در تعداد درخواست‌ها</li>
+                    <li>بدون تبلیغات آزاردهنده</li>
+                    <li>پشتیبانی 24 ساعته VIP</li>
+                    <li>آپدیت‌های مداوم و اضافه شدن قابلیت‌های جدید</li>
+                    <li>سرورهای پرسرعت اختصاصی</li>
+                </ul>
+                <a href="https://t.me/cucumbernumbot" class="btn btn-primary" style="width: 100%;">
+                    <span class="btn-icon">🥒</span>
+                    شروع رایگان
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- بخش نظرات کاربران -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">نظرات کاربران</h2>
+            <p class="section-subtitle fade-in delay-1">آنچه دیگران درباره ربات خیار می‌گویند</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-in delay-1">
+                    <p class="testimonial-text">ربات خیار واقعا همه‌کاره است! از وقتی آن را پیدا کردم، حداقل 10 ربات دیگر را حذف کردم چون همه نیازهایم را پوشش می‌دهد.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">م</div>
+                        <div class="author-info">
+                            <div class="author-name">محمد رضایی</div>
+                            <div class="author-title">طراح UI/UX</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in delay-2">
+                    <p class="testimonial-text">بخش هوش مصنوعی این ربات واقعا حرفه‌ای است. کیفیت پاسخ‌ها و تصاویر تولید شده قابل مقایسه با بهترین ربات‌های خارجی است.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">س</div>
+                        <div class="author-info">
+                            <div class="author-name">سارا محمدی</div>
+                            <div class="author-title">توسعه‌دهنده هوش مصنوعی</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in delay-3">
+                    <p class="testimonial-text">دانلودر این ربات معرکه است! هر چیزی از هر سایتی را که بخواهم می‌توانم دانلود کنم. واقعا زندگی را راحت کرده است.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ع</div>
+                        <div class="author-info">
+                            <div class="author-name">علی حسینی</div>
+                            <div class="author-title">مدیر محتوا</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- بخش سوالات متداول -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title fade-in">سوالات متداول</h2>
+            <p class="section-subtitle fade-in delay-1">پاسخ به رایج‌ترین سوالات درباره ربات خیار</p>
+            
+            <div class="accordion fade-in delay-2">
+                <div class="accordion-item">
+                    <div class="accordion-header">آیا استفاده از ربات خیار واقعا رایگان است؟</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            بله، تمامی قابلیت‌های ربات خیار به صورت کاملا رایگان در اختیار کاربران قرار دارد و هیچ هزینه‌ای برای استفاده از آن دریافت نمی‌شود.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">چگونه می‌توانم از ربات استفاده کنم؟</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            کافی است روی دکمه "شروع مکالمه" کلیک کنید یا آیدی @cucumbernumbot را در تلگرام جستجو کنید. پس از شروع گفتگو، منوی اصلی ربات نمایش داده می‌شود.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">آیا ربات محدودیت استفاده دارد؟</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            خیر، ربات خیار هیچ محدودیتی در تعداد درخواست‌ها یا استفاده از قابلیت‌ها ندارد. شما می‌توانید به صورت نامحدود از تمامی امکانات استفاده کنید.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">چگونه می‌توانم با پشتیبانی تماس بگیرم؟</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            از طریق بخش "پشتیبانی" در منوی اصلی ربات می‌توانید با تیم پشتیبانی 24 ساعته ما در ارتباط باشید. پاسخگویی معمولا در کمتر از 1 ساعت انجام می‌شود.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">آیا ربات خیار امن است؟</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            بله، ربات خیار با بالاترین استانداردهای امنیتی توسعه داده شده است. اطلاعات شما نزد ما محفوظ است و هیچ گونه دسترسی به داده‌های شخصی شما نداریم.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column fade-in">
+                    <h3>درباره خیار</h3>
+                    <p class="footer-about">ربات خیار یک ربات همه‌کاره تلگرام است که با هدف ارائه بهترین خدمات به کاربران فارسی‌زبان توسعه داده شده است. ما به کیفیت و رضایت کاربران اهمیت می‌دهیم.</p>
+                    <div class="social-links">
+                        <a href="https://t.me/cucumbernumbot" class="social-link" title="تلگرام"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" title="توییتر"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" title="یوتیوب"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column fade-in delay-1">
+                    <h3>لینک‌های سریع</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">ویژگی‌ها</a></li>
+                        <li><a href="https://t.me/cucumbernumbot">شروع مکالمه</a></li>
+                        <li><a href="#">راهنمای استفاده</a></li>
+                        <li><a href="#">سوالات متداول</a></li>
+                        <li><a href="#">وبلاگ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column fade-in delay-2">
+                    <h3>قابلیت‌ها</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">هوش مصنوعی</a></li>
+                        <li><a href="#">دانلودر</a></li>
+                        <li><a href="#">جعبه ابزار</a></li>
+                        <li><a href="#">VPN و پروکسی</a></li>
+                        <li><a href="#">مزاحم‌یاب</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column fade-in delay-3">
+                    <h3>تماس با ما</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://t.me/cucumbernumbot">پشتیبانی تلگرام</a></li>
+                        <li><a href="#">ارسال پیام</a></li>
+                        <li><a href="#">گزارش مشکل</a></li>
+                        <li><a href="#">پیشنهادات</a></li>
+                        <li><a href="#">همکاری با ما</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 ربات خیار | آیدی ربات: @cucumbernumbot | تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- دکمه بازگشت به بالا -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // اسکریپت‌های پیشرفته
+        document.addEventListener('DOMContentLoaded', function() {
+            // انیمیشن اسکرول
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+            
+            // دکمه بازگشت به بالا
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+            
+            backToTop.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // پارالاکس
+            const hero = document.querySelector('.hero');
+            
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                hero.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+            });
+            
+            // اکوردیون
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const accordionItem = header.parentElement;
+                    const accordionContent = header.nextElementSibling;
+                    
+                    if (header.classList.contains('active')) {
+                        header.classList.remove('active');
+                        accordionContent.style.maxHeight = null;
+                    } else {
+                        // بستن همه آیتم‌های دیگر
+                        document.querySelectorAll('.accordion-header.active').forEach(activeHeader => {
+                            activeHeader.classList.remove('active');
+                            activeHeader.nextElementSibling.style.maxHeight = null;
+                        });
+                        
+                        header.classList.add('active');
+                        accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+                    }
+                });
+            });
+            
+            // حالت تاریک
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            function updateForDarkMode(e) {
+                if (e.matches) {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+            }
+            
+            darkModeMediaQuery.addListener(updateForDarkMode);
+            updateForDarkMode(darkModeMediaQuery);
+            
+            // پیش‌بارگذاری منابع
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js').then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    }).catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+                });
+            }
+            
+            // انیمیشن‌های اضافی
+            const pulseElements = document.querySelectorAll('.pulse');
+            
+            pulseElements.forEach(element => {
+                element.addEventListener('animationiteration', () => {
+                    element.style.animationPlayState = 'paused';
+                    setTimeout(() => {
+                        element.style.animationPlayState = 'running';
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
