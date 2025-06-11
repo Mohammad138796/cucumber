@@ -31,6 +31,8 @@
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
             --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
         
         * {
@@ -42,6 +44,7 @@
         
         html {
             scroll-behavior: smooth;
+            font-size: 16px;
         }
         
         body {
@@ -50,6 +53,7 @@
             line-height: 1.8;
             overflow-x: hidden;
             position: relative;
+            min-height: 100vh;
         }
         
         .container {
@@ -58,15 +62,16 @@
             padding: 0 30px;
         }
         
-        /* هدر جدید با افکت پارالاکس و ویدیو بکگراند */
+        /* هدر جدید با افکت پارالاکس و شیشه‌ای */
         .hero {
             background: var(--gradient);
             color: white;
-            padding: 100px 0 180px;
+            padding: 120px 0 200px;
             position: relative;
             overflow: hidden;
             text-align: center;
             clip-path: ellipse(120% 100% at 50% 0%);
+            isolation: isolate;
         }
         
         .hero::before {
@@ -80,6 +85,20 @@
             background-size: cover;
             background-position: bottom;
             opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path fill="%23f5fdf0" d="M0,0L48,16C96,32,192,64,288,80C384,96,480,96,576,80C672,64,768,32,864,32C960,32,1056,64,1152,80C1248,96,1344,96,1392,96L1440,96L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+            z-index: -1;
         }
         
         .hero-content {
@@ -93,27 +112,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .logo-icon {
-            font-size: 4.5rem;
+            font-size: 5rem;
             margin-left: 20px;
-            animation: bounce 3s infinite;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+            animation: bounce 3s infinite, pulse 2s infinite alternate;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+            transform-style: preserve-3d;
         }
         
         .logo-text {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
             background: linear-gradient(to right, white, var(--light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
         }
         
         .tagline {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             opacity: 0.9;
             margin-bottom: 40px;
             line-height: 1.6;
@@ -131,17 +152,18 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 18px 40px;
+            padding: 20px 45px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: var(--transition);
             box-shadow: var(--shadow-md);
             border: none;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
         }
         
         .btn::before {
@@ -151,95 +173,92 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(-100%);
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+            transform: translateY(-100%);
             transition: var(--transition);
         }
         
         .btn:hover::before {
-            transform: translateX(0);
+            transform: translateY(0);
         }
         
         .btn-primary {
             background: var(--gradient-accent);
             color: var(--primary-darker);
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
         }
         
         .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 200, 0, 0.3);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 200, 0, 0.4);
         }
         
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--glass);
             color: white;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--glass-border);
         }
         
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.05);
         }
         
         .btn-icon {
-            margin-right: 10px;
-            font-size: 1.3rem;
+            margin-right: 12px;
+            font-size: 1.5rem;
         }
         
         .stats {
             display: flex;
             justify-content: center;
             gap: 40px;
-            margin-top: 60px;
+            margin-top: 80px;
             flex-wrap: wrap;
         }
         
         .stat-item {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--glass);
             backdrop-filter: blur(5px);
-            padding: 20px 30px;
-            border-radius: 15px;
-            min-width: 180px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 25px 35px;
+            border-radius: 20px;
+            min-width: 200px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
         }
         
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
             background: linear-gradient(to right, white, var(--light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1;
         }
         
         .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         
         /* بخش ویژگی‌ها */
         .features {
-            padding: 120px 0 80px;
+            padding: 150px 0 100px;
             position: relative;
-            margin-top: -80px;
-        }
-        
-        .features::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path fill="%23f5fdf0" d="M0,0L48,16C96,32,192,64,288,80C384,96,480,96,576,80C672,64,768,32,864,32C960,32,1056,64,1152,80C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>');
-            background-size: cover;
-            background-position: bottom;
+            margin-top: -100px;
+            background-color: var(--lighter);
         }
         
         .section-title {
             text-align: center;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             margin-bottom: 80px;
             color: var(--primary-darker);
             position: relative;
@@ -249,34 +268,34 @@
         .section-title::after {
             content: "";
             position: absolute;
-            bottom: -20px;
+            bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 5px;
+            width: 120px;
+            height: 6px;
             background: var(--gradient);
             border-radius: 5px;
         }
         
         .section-subtitle {
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto 60px;
+            max-width: 800px;
+            margin: 0 auto 80px;
             line-height: 1.8;
         }
         
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+            gap: 50px;
         }
         
         .feature-card {
             background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
+            border-radius: 25px;
+            padding: 50px 40px;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
             border: 1px solid rgba(0, 0, 0, 0.05);
@@ -300,18 +319,18 @@
         }
         
         .feature-card:hover {
-            transform: translateY(-15px);
+            transform: translateY(-15px) scale(1.02);
             box-shadow: var(--shadow-lg);
         }
         
         .feature-card:hover::before {
             width: 100%;
-            opacity: 0.05;
+            opacity: 0.1;
         }
         
         .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
+            font-size: 4rem;
+            margin-bottom: 30px;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -319,12 +338,12 @@
         }
         
         .feature-title {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
             color: var(--dark);
-            font-weight: 700;
+            font-weight: 800;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
         
         .feature-title::after {
@@ -332,32 +351,35 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 50px;
-            height: 3px;
+            width: 60px;
+            height: 4px;
             background: var(--gradient);
             border-radius: 3px;
         }
         
         .feature-desc {
             color: var(--text-light);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             flex-grow: 1;
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
         
         .feature-badge {
             display: inline-block;
-            background: rgba(37, 211, 102, 0.1);
+            background: rgba(37, 211, 102, 0.15);
             color: var(--primary);
-            padding: 6px 15px;
+            padding: 8px 18px;
             border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-top: 15px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 20px;
+            border: 1px solid rgba(37, 211, 102, 0.3);
         }
         
         /* بخش دمو */
         .demo {
-            padding: 120px 0;
+            padding: 150px 0;
             background-color: white;
             position: relative;
             overflow: hidden;
@@ -379,7 +401,7 @@
             display: flex;
             align-items: center;
             flex-wrap: wrap-reverse;
-            gap: 60px;
+            gap: 80px;
             position: relative;
             z-index: 2;
         }
@@ -390,37 +412,40 @@
         }
         
         .demo-title {
-            font-size: 2.2rem;
-            margin-bottom: 25px;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
             color: var(--primary-darker);
             font-weight: 800;
+            line-height: 1.3;
         }
         
         .demo-desc {
             color: var(--text-light);
             margin-bottom: 40px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             line-height: 1.8;
         }
         
         .demo-features {
             list-style: none;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         
         .demo-features li {
-            padding: 12px 0;
+            padding: 15px 0;
             position: relative;
-            padding-right: 30px;
+            padding-right: 40px;
+            font-size: 1.1rem;
         }
         
         .demo-features li::before {
             content: '✓';
             position: absolute;
             right: 0;
-            top: 12px;
+            top: 15px;
             color: var(--primary);
             font-weight: bold;
+            font-size: 1.3rem;
         }
         
         .demo-image {
@@ -432,15 +457,16 @@
         
         .phone-mockup {
             width: 100%;
-            max-width: 350px;
+            max-width: 400px;
             margin: 0 auto;
             position: relative;
-            border-radius: 40px;
+            border-radius: 50px;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
             border: 15px solid var(--dark);
             transform-style: preserve-3d;
             animation: float 6s ease-in-out infinite;
+            background: var(--dark);
         }
         
         .phone-screen {
@@ -449,10 +475,11 @@
             background: var(--light);
             position: relative;
             overflow: hidden;
+            min-height: 600px;
         }
         
         .screen-content {
-            padding: 20px;
+            padding: 30px;
             font-family: 'Vazirmatn', sans-serif;
         }
         
@@ -460,63 +487,68 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         
         .screen-title {
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-size: 1.4rem;
+            font-weight: 800;
             color: var(--primary-darker);
         }
         
         .screen-time {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--text-light);
         }
         
         .bot-avatar {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             background: var(--gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 2rem;
+            margin: 0 auto 30px;
+            font-size: 2.5rem;
             color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite alternate;
         }
         
         .welcome-message {
             background: white;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
             box-shadow: var(--shadow-sm);
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            line-height: 1.6;
         }
         
         .menu-button {
             display: block;
             background: var(--primary);
             color: white;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         
         .menu-button:hover {
             background: var(--primary-dark);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         /* بخش قیمت (رایگان) */
         .pricing {
-            padding: 120px 0;
+            padding: 150px 0;
             background: var(--gradient);
             color: white;
             position: relative;
@@ -544,17 +576,23 @@
         }
         
         .price-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 50px;
-            box-shadow: var(--shadow-md);
-            max-width: 600px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 60px;
+            box-shadow: var(--shadow-lg);
+            max-width: 700px;
             margin: 0 auto;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             text-align: center;
+            transition: var(--transition);
+        }
+        
+        .price-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
         
         .price-card::before {
@@ -563,35 +601,38 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 6px;
             background: var(--gradient-accent);
         }
         
         .price-title {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
             font-weight: 800;
         }
         
         .price-amount {
-            font-size: 4.5rem;
+            font-size: 5rem;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             position: relative;
             display: inline-block;
             line-height: 1;
+            background: linear-gradient(to right, white, var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .price-amount::after {
             content: 'رایگان!';
             position: absolute;
-            top: -15px;
-            right: -40px;
+            top: -20px;
+            right: -50px;
             background: var(--accent);
             color: var(--primary-darker);
-            padding: 5px 15px;
+            padding: 8px 20px;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 800;
             transform: rotate(15deg);
             box-shadow: var(--shadow-sm);
@@ -599,80 +640,108 @@
         
         .price-features {
             list-style: none;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         
         .price-features li {
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
-            padding-right: 30px;
+            padding-right: 40px;
+            font-size: 1.1rem;
         }
         
         .price-features li::before {
             content: '✓';
             position: absolute;
             right: 0;
-            top: 15px;
+            top: 18px;
             color: var(--accent);
             font-weight: bold;
+            font-size: 1.3rem;
         }
         
         /* بخش نظرات کاربران */
         .testimonials {
-            padding: 120px 0;
+            padding: 150px 0;
             background-color: var(--lighter);
+            position: relative;
         }
         
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path fill="white" d="M0,0L48,16C96,32,192,64,288,80C384,96,480,96,576,80C672,64,768,32,864,32C960,32,1056,64,1152,80C1248,96,1344,96,1392,96L1440,96L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .testimonial-slider {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
         }
         
         .testimonial-card {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 40px;
             box-shadow: var(--shadow-sm);
             position: relative;
+            min-width: 100%;
+            margin: 0 15px;
         }
         
         .testimonial-card::before {
             content: '"';
             position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 5rem;
+            top: 30px;
+            right: 40px;
+            font-size: 6rem;
             color: rgba(37, 211, 102, 0.1);
             font-family: serif;
             line-height: 1;
+            z-index: 1;
         }
         
         .testimonial-text {
             font-style: italic;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             position: relative;
             z-index: 2;
+            font-size: 1.2rem;
+            line-height: 1.8;
         }
         
         .testimonial-author {
             display: flex;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
         
         .author-avatar {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: var(--gradient);
-            margin-left: 15px;
+            margin-left: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
+            font-size: 1.5rem;
         }
         
         .author-info {
@@ -680,42 +749,83 @@
         }
         
         .author-name {
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 5px;
+            font-size: 1.2rem;
         }
         
         .author-title {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--text-light);
+        }
+        
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 15px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(37, 211, 102, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
         }
         
         /* بخش سوالات متداول */
         .faq {
-            padding: 120px 0;
+            padding: 150px 0;
             background: white;
+            position: relative;
+        }
+        
+        .faq::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path fill="%23f5fdf0" d="M0,0L48,16C96,32,192,64,288,80C384,96,480,96,576,80C672,64,768,32,864,32C960,32,1056,64,1152,80C1248,96,1344,96,1392,96L1440,96L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
         }
         
         .accordion {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
         .accordion-item {
-            margin-bottom: 15px;
-            border-radius: 10px;
+            margin-bottom: 20px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .accordion-item:hover {
+            box-shadow: var(--shadow-md);
         }
         
         .accordion-header {
             background: var(--lighter);
-            padding: 20px;
-            font-weight: 700;
+            padding: 25px;
+            font-weight: 800;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: var(--transition);
+            font-size: 1.2rem;
         }
         
         .accordion-header:hover {
@@ -725,7 +835,7 @@
         
         .accordion-header::after {
             content: '+';
-            font-size: 1.5rem;
+            font-size: 2rem;
             transition: var(--transition);
         }
         
@@ -739,37 +849,98 @@
         }
         
         .accordion-content {
-            padding: 0 20px;
+            padding: 0 25px;
             max-height: 0;
             overflow: hidden;
             transition: var(--transition);
         }
         
         .accordion-content-inner {
-            padding: 20px 0;
+            padding: 25px 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+        
+        /* بخش تماس */
+        .contact {
+            padding: 150px 0;
+            background: var(--lighter);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 80px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .contact-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .contact-info {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        .contact-link {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        
+        .contact-link:hover {
+            color: var(--primary-dark);
+            transform: translateX(5px);
         }
         
         /* فوتر */
         footer {
             background: var(--darker);
             color: white;
-            padding: 100px 0 50px;
+            padding: 120px 0 60px;
             position: relative;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-bottom: 60px;
+            gap: 60px;
+            margin-bottom: 80px;
         }
         
         .footer-column h3 {
-            font-size: 1.5rem;
-            margin-bottom: 25px;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
             position: relative;
-            padding-bottom: 15px;
-            font-weight: 700;
+            padding-bottom: 20px;
+            font-weight: 800;
         }
         
         .footer-column h3::after {
@@ -777,15 +948,16 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 50px;
-            height: 3px;
+            width: 60px;
+            height: 4px;
             background: var(--gradient);
         }
         
         .footer-about {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             opacity: 0.8;
             line-height: 1.8;
+            font-size: 1.1rem;
         }
         
         .footer-links {
@@ -793,7 +965,7 @@
         }
         
         .footer-links li {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .footer-links a {
@@ -802,11 +974,12 @@
             transition: var(--transition);
             display: flex;
             align-items: center;
+            font-size: 1.1rem;
         }
         
         .footer-links a:hover {
             color: white;
-            padding-right: 10px;
+            padding-right: 15px;
         }
         
         .footer-links a::before {
@@ -822,41 +995,42 @@
         
         .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 25px;
+            gap: 20px;
+            margin-top: 30px;
         }
         
         .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             transition: var(--transition);
         }
         
         .social-link:hover {
             background: var(--primary);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.1);
         }
         
         .newsletter {
-            margin-top: 25px;
+            margin-top: 30px;
         }
         
         .newsletter-input {
             width: 100%;
-            padding: 12px 20px;
+            padding: 15px 25px;
             border-radius: 50px;
             border: none;
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             transition: var(--transition);
+            font-size: 1rem;
         }
         
         .newsletter-input:focus {
@@ -868,29 +1042,47 @@
             color: rgba(255, 255, 255, 0.5);
         }
         
+        .newsletter-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 50px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+        
+        .newsletter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
         .copyright {
             text-align: center;
-            padding-top: 50px;
+            padding-top: 60px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
         
         /* دکمه بازگشت به بالا */
         .back-to-top {
             position: fixed;
-            bottom: 40px;
-            left: 40px;
-            width: 60px;
-            height: 60px;
+            bottom: 50px;
+            left: 50px;
+            width: 70px;
+            height: 70px;
             background: var(--gradient);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            font-size: 1.8rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
@@ -942,7 +1134,19 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.05);
+                transform: scale(1.1);
+            }
+        }
+        
+        @keyframes wave {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(5deg);
+            }
+            75% {
+                transform: rotate(-5deg);
             }
         }
         
@@ -967,6 +1171,11 @@
             animation: pulse 2s infinite;
         }
         
+        .wave {
+            animation: wave 3s infinite;
+            transform-origin: bottom center;
+        }
+        
         /* حالت تاریک */
         @media (prefers-color-scheme: dark) {
             body {
@@ -978,17 +1187,17 @@
                 background-color: #1e1e1e;
             }
             
-            .feature-card, .testimonial-card, .accordion-item {
+            .feature-card, .testimonial-card, .accordion-item, .contact-card {
                 background-color: #2d2d2d;
                 color: #e0e0e0;
                 border-color: #333;
             }
             
-            .feature-title, .demo-title, .accordion-header {
+            .feature-title, .demo-title, .accordion-header, .contact-title {
                 color: #ffffff;
             }
             
-            .feature-desc, .demo-desc, .price-features li, .testimonial-text, .accordion-content {
+            .feature-desc, .demo-desc, .price-features li, .testimonial-text, .accordion-content, .contact-info {
                 color: #b0b0b0;
             }
             
@@ -1010,6 +1219,22 @@
             .container {
                 padding: 0 40px;
             }
+            
+            .hero {
+                padding: 100px 0 180px;
+            }
+            
+            .logo-text {
+                font-size: 3.5rem;
+            }
+            
+            .logo-icon {
+                font-size: 4.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.8rem;
+            }
         }
         
         @media (max-width: 992px) {
@@ -1022,17 +1247,26 @@
             }
             
             .logo-icon {
-                font-size: 3.5rem;
+                font-size: 4rem;
             }
             
             .section-title {
                 font-size: 2.5rem;
             }
+            
+            .tagline {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 18px 40px;
+                font-size: 1.2rem;
+            }
         }
         
         @media (max-width: 768px) {
             .hero {
-                padding: 60px 0 120px;
+                padding: 70px 0 130px;
                 clip-path: ellipse(150% 100% at 50% 0%);
             }
             
@@ -1041,32 +1275,36 @@
             }
             
             .logo-icon {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             
             .tagline {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.3rem;
             }
             
             .btn {
-                padding: 15px 30px;
-                font-size: 1rem;
+                padding: 16px 35px;
+                font-size: 1.1rem;
             }
             
             .feature-card {
-                padding: 30px;
+                padding: 40px 30px;
             }
             
             .feature-icon {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             
             .feature-title {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
             }
             
             .stats {
@@ -1074,12 +1312,20 @@
             }
             
             .stat-item {
-                min-width: 140px;
-                padding: 15px 20px;
+                min-width: 160px;
+                padding: 20px 25px;
             }
             
             .stat-number {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+            
+            .back-to-top {
+                width: 60px;
+                height: 60px;
+                bottom: 30px;
+                left: 30px;
+                font-size: 1.5rem;
             }
         }
         
@@ -1089,23 +1335,28 @@
             }
             
             .hero {
-                padding: 50px 0 100px;
+                padding: 60px 0 120px;
             }
             
             .logo-text {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .logo-icon {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
             
             .tagline {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .section-title {
                 font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 50px;
             }
             
             .cta-buttons {
@@ -1121,6 +1372,22 @@
                 grid-template-columns: 1fr;
             }
             
+            .feature-card {
+                padding: 30px 25px;
+            }
+            
+            .feature-icon {
+                font-size: 3rem;
+            }
+            
+            .feature-title {
+                font-size: 1.4rem;
+            }
+            
+            .stat-item {
+                min-width: 100%;
+            }
+            
             .back-to-top {
                 width: 50px;
                 height: 50px;
@@ -1132,7 +1399,7 @@
     </style>
 </head>
 <body>
-    <!-- هدر جدید با افکت پارالاکس -->
+    <!-- هدر جدید با افکت پارالاکس و شیشه‌ای -->
     <header class="hero">
         <div class="hero-content">
             <div class="logo fade-in">
@@ -1141,7 +1408,7 @@
             </div>
             <p class="tagline fade-in delay-1">همه‌چیز در یک ربات! از هوش مصنوعی پیشرفته تا دانلود از تمامی شبکه‌های اجتماعی و ابزارهای کاربردی روزمره</p>
             <div class="cta-buttons fade-in delay-2">
-                <a href="https://t.me/cucumbernumbot" class="btn btn-primary">
+                <a href="https://t.me/cucumbernumbot" class="btn btn-primary wave">
                     <span class="btn-icon">🚀</span>
                     شروع کنید
                 </a>
@@ -1163,6 +1430,10 @@
                 <div class="stat-item">
                     <div class="stat-number">24/7</div>
                     <div class="stat-label">پشتیبانی</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+10K</div>
+                    <div class="stat-label">کاربر فعال</div>
                 </div>
             </div>
         </div>
@@ -1232,6 +1503,7 @@
                         <li>پشتیبانی 24 ساعته</li>
                         <li>به‌روزرسانی مداوم قابلیت‌ها</li>
                         <li>سرورهای پرسرعت و بدون محدودیت</li>
+                        <li>رابط کاربری ساده و کاربرپسند</li>
                     </ul>
                     
                     <div class="cta-buttons">
@@ -1262,6 +1534,8 @@
                                 <a href="#" class="menu-button">بخش دانلودر ✨</a>
                                 <a href="#" class="menu-button">جعبه ابزار 🧰</a>
                                 <a href="#" class="menu-button">پشتیبانی ☎</a>
+                                <a href="#" class="menu-button">VPN و پروکسی 📡</a>
+                                <a href="#" class="menu-button">مزاحم‌یاب 🍐</a>
                             </div>
                         </div>
                     </div>
@@ -1286,6 +1560,7 @@
                     <li>پشتیبانی 24 ساعته VIP</li>
                     <li>آپدیت‌های مداوم و اضافه شدن قابلیت‌های جدید</li>
                     <li>سرورهای پرسرعت اختصاصی</li>
+                    <li>امنیت و حریم خصوصی تضمین شده</li>
                 </ul>
                 <a href="https://t.me/cucumbernumbot" class="btn btn-primary" style="width: 100%;">
                     <span class="btn-icon">🥒</span>
@@ -1301,38 +1576,46 @@
             <h2 class="section-title fade-in">نظرات کاربران</h2>
             <p class="section-subtitle fade-in delay-1">آنچه دیگران درباره ربات خیار می‌گویند</p>
             
-            <div class="testimonial-grid">
-                <div class="testimonial-card fade-in delay-1">
-                    <p class="testimonial-text">ربات خیار واقعا همه‌کاره است! از وقتی آن را پیدا کردم، حداقل 10 ربات دیگر را حذف کردم چون همه نیازهایم را پوشش می‌دهد.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">م</div>
-                        <div class="author-info">
-                            <div class="author-name">محمد رضایی</div>
-                            <div class="author-title">طراح UI/UX</div>
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">ربات خیار واقعا همه‌کاره است! از وقتی آن را پیدا کردم، حداقل 10 ربات دیگر را حذف کردم چون همه نیازهایم را پوشش می‌دهد. بخش هوش مصنوعی آن واقعا حرفه‌ای است و کیفیت پاسخ‌ها قابل مقایسه با بهترین ربات‌های خارجی است.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">م</div>
+                            <div class="author-info">
+                                <div class="author-name">محمد رضایی</div>
+                                <div class="author-title">طراح UI/UX</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">دانلودر این ربات معرکه است! هر چیزی از هر سایتی را که بخواهم می‌توانم دانلود کنم. واقعا زندگی را راحت کرده است. همچنین بخش VPN آن همیشه کار می‌کند و سرعت خوبی دارد.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">س</div>
+                            <div class="author-info">
+                                <div class="author-name">سارا محمدی</div>
+                                <div class="author-title">توسعه‌دهنده هوش مصنوعی</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">جعبه ابزار این ربات عالی است. از تبدیل فایل تا فال حافظ و مترجم، همه چیز در یک جا. رابط کاربری ساده و روانی دارد و نیازی به آموزش خاصی نیست. پشتیبانی هم همیشه پاسخگو است.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">ع</div>
+                            <div class="author-info">
+                                <div class="author-name">علی حسینی</div>
+                                <div class="author-title">مدیر محتوا</div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="testimonial-card fade-in delay-2">
-                    <p class="testimonial-text">بخش هوش مصنوعی این ربات واقعا حرفه‌ای است. کیفیت پاسخ‌ها و تصاویر تولید شده قابل مقایسه با بهترین ربات‌های خارجی است.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">س</div>
-                        <div class="author-info">
-                            <div class="author-name">سارا محمدی</div>
-                            <div class="author-title">توسعه‌دهنده هوش مصنوعی</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card fade-in delay-3">
-                    <p class="testimonial-text">دانلودر این ربات معرکه است! هر چیزی از هر سایتی را که بخواهم می‌توانم دانلود کنم. واقعا زندگی را راحت کرده است.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">ع</div>
-                        <div class="author-info">
-                            <div class="author-name">علی حسینی</div>
-                            <div class="author-title">مدیر محتوا</div>
-                        </div>
-                    </div>
+                <div class="slider-nav" id="sliderNav">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
                 </div>
             </div>
         </div>
@@ -1349,7 +1632,7 @@
                     <div class="accordion-header">آیا استفاده از ربات خیار واقعا رایگان است؟</div>
                     <div class="accordion-content">
                         <div class="accordion-content-inner">
-                            بله، تمامی قابلیت‌های ربات خیار به صورت کاملا رایگان در اختیار کاربران قرار دارد و هیچ هزینه‌ای برای استفاده از آن دریافت نمی‌شود.
+                            بله، تمامی قابلیت‌های ربات خیار به صورت کاملا رایگان در اختیار کاربران قرار دارد و هیچ هزینه‌ای برای استفاده از آن دریافت نمی‌شود. ما اعتقاد داریم که دسترسی به ابزارهای کاربردی باید برای همه آزاد باشد.
                         </div>
                     </div>
                 </div>
@@ -1358,7 +1641,7 @@
                     <div class="accordion-header">چگونه می‌توانم از ربات استفاده کنم؟</div>
                     <div class="accordion-content">
                         <div class="accordion-content-inner">
-                            کافی است روی دکمه "شروع مکالمه" کلیک کنید یا آیدی @cucumbernumbot را در تلگرام جستجو کنید. پس از شروع گفتگو، منوی اصلی ربات نمایش داده می‌شود.
+                            کافی است روی دکمه "شروع مکالمه" کلیک کنید یا آیدی @cucumbernumbot را در تلگرام جستجو کنید. پس از شروع گفتگو، منوی اصلی ربات نمایش داده می‌شود. از طریق این منو می‌توانید به تمامی قابلیت‌ها دسترسی داشته باشید.
                         </div>
                     </div>
                 </div>
@@ -1367,7 +1650,7 @@
                     <div class="accordion-header">آیا ربات محدودیت استفاده دارد؟</div>
                     <div class="accordion-content">
                         <div class="accordion-content-inner">
-                            خیر، ربات خیار هیچ محدودیتی در تعداد درخواست‌ها یا استفاده از قابلیت‌ها ندارد. شما می‌توانید به صورت نامحدود از تمامی امکانات استفاده کنید.
+                            خیر، ربات خیار هیچ محدودیتی در تعداد درخواست‌ها یا استفاده از قابلیت‌ها ندارد. شما می‌توانید به صورت نامحدود از تمامی امکانات استفاده کنید. تنها در موارد بسیار نادر و برای جلوگیری از سوءاستفاده ممکن است محدودیت‌های جزئی اعمال شود.
                         </div>
                     </div>
                 </div>
@@ -1376,7 +1659,7 @@
                     <div class="accordion-header">چگونه می‌توانم با پشتیبانی تماس بگیرم؟</div>
                     <div class="accordion-content">
                         <div class="accordion-content-inner">
-                            از طریق بخش "پشتیبانی" در منوی اصلی ربات می‌توانید با تیم پشتیبانی 24 ساعته ما در ارتباط باشید. پاسخگویی معمولا در کمتر از 1 ساعت انجام می‌شود.
+از طریق بخش "پشتیبانی" در منوی اصلی ربات می‌توانید با تیم پشتیبانی 24 ساعته ما در ارتباط باشید. پاسخگویی معمولا در کمتر از 1 ساعت انجام می‌شود. همچنین می‌توانید از طریق آیدی @Mani_coder مستقیما با پشتیبانی در تماس باشید.
                         </div>
                     </div>
                 </div>
@@ -1385,9 +1668,49 @@
                     <div class="accordion-header">آیا ربات خیار امن است؟</div>
                     <div class="accordion-content">
                         <div class="accordion-content-inner">
-                            بله، ربات خیار با بالاترین استانداردهای امنیتی توسعه داده شده است. اطلاعات شما نزد ما محفوظ است و هیچ گونه دسترسی به داده‌های شخصی شما نداریم.
+                            بله، ربات خیار با بالاترین استانداردهای امنیتی توسعه داده شده است. اطلاعات شما نزد ما محفوظ است و هیچ گونه دسترسی به داده‌های شخصی شما نداریم. تمامی ارتباطات با ربات به صورت رمزنگاری شده انجام می‌شود.
                         </div>
                     </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">چگونه می‌توانم به ربات کمک کنم؟</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            شما می‌توانید با معرفی ربات به دوستان خود، ارائه پیشنهادات سازنده و گزارش مشکلات به ما کمک کنید. همچنین اگر مایل به حمایت مالی هستید، می‌توانید از طریق بخش "حمایت" در منوی ربات اقدام نمایید.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- بخش تماس -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">ارتباط با ما</h2>
+            <p class="section-subtitle fade-in delay-1">همیشه در دسترس هستیم تا به سوالات و پیشنهادات شما پاسخ دهیم</p>
+            
+            <div class="contact-grid fade-in delay-2">
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3 class="contact-title">تلگرام</h3>
+                    <p class="contact-info">برای ارتباط مستقیم با ربات و استفاده از امکانات</p>
+                    <a href="https://t.me/cucumbernumbot" class="contact-link">@cucumbernumbot</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3 class="contact-title">پشتیبانی</h3>
+                    <p class="contact-info">برای گزارش مشکلات و دریافت راهنمایی</p>
+                    <a href="https://t.me/Mani_coder" class="contact-link">@Mani_coder</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3 class="contact-title">ایمیل</h3>
+                    <p class="contact-info">برای ارتباط رسمی و پیشنهادات</p>
+                    <a href="mailto:support@cucumberbot.ir" class="contact-link">source.donii@gmail.com</a>
                 </div>
             </div>
         </div>
@@ -1399,12 +1722,12 @@
             <div class="footer-content">
                 <div class="footer-column fade-in">
                     <h3>درباره خیار</h3>
-                    <p class="footer-about">ربات خیار یک ربات همه‌کاره تلگرام است که با هدف ارائه بهترین خدمات به کاربران فارسی‌زبان توسعه داده شده است. ما به کیفیت و رضایت کاربران اهمیت می‌دهیم.</p>
+                    <p class="footer-about">ربات خیار یک ربات همه‌کاره تلگرام است که با هدف ارائه بهترین خدمات به کاربران فارسی‌زبان توسعه داده شده است. ما به کیفیت و رضایت کاربران اهمیت می‌دهیم و همواره در حال بهبود ربات هستیم.</p>
                     <div class="social-links">
                         <a href="https://t.me/cucumbernumbot" class="social-link" title="تلگرام"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="social-link" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link" title="توییتر"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link" title="یوتیوب"><i class="fab fa-youtube"></i></a>
+                        <a href="https://instagram.com/source_donii" class="social-link" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/source_donii" class="social-link" title="گیت هاب"><i class="fab fa-github"></i></a>
+                        <a href="https://youtube.com/source_donii" class="social-link" title="یوتیوب"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
@@ -1414,8 +1737,9 @@
                         <li><a href="#features">ویژگی‌ها</a></li>
                         <li><a href="https://t.me/cucumbernumbot">شروع مکالمه</a></li>
                         <li><a href="#">راهنمای استفاده</a></li>
-                        <li><a href="#">سوالات متداول</a></li>
+                        <li><a href="#faq">سوالات متداول</a></li>
                         <li><a href="#">وبلاگ</a></li>
+                        <li><a href="#">قوانین استفاده</a></li>
                     </ul>
                 </div>
                 
@@ -1427,23 +1751,22 @@
                         <li><a href="#">جعبه ابزار</a></li>
                         <li><a href="#">VPN و پروکسی</a></li>
                         <li><a href="#">مزاحم‌یاب</a></li>
+                        <li><a href="#">تبدیل فایل</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column fade-in delay-3">
-                    <h3>تماس با ما</h3>
-                    <ul class="footer-links">
-                        <li><a href="https://t.me/cucumbernumbot">پشتیبانی تلگرام</a></li>
-                        <li><a href="#">ارسال پیام</a></li>
-                        <li><a href="#">گزارش مشکل</a></li>
-                        <li><a href="#">پیشنهادات</a></li>
-                        <li><a href="#">همکاری با ما</a></li>
-                    </ul>
+                    <h3>عضویت در خبرنامه</h3>
+                    <p class="footer-about">برای دریافت آخرین به‌روزرسانی‌ها و اخبار ربات در خبرنامه عضو شوید</p>
+                    <div class="newsletter">
+                        <input type="email" class="newsletter-input" placeholder="source.donii@gmail.com">
+                        <button class="newsletter-btn">عضویت</button>
+                    </div>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>© 2023 ربات خیار | آیدی ربات: @cucumbernumbot | تمامی حقوق محفوظ است.</p>
+                <p>© 2025 ربات خیار | آیدی ربات: @cucumbernumbot | تمامی حقوق محفوظ است.</p>
             </div>
         </div>
     </footer>
@@ -1520,6 +1843,29 @@
                 });
             });
             
+            // اسلایدر نظرات
+            const testimonialTrack = document.getElementById('testimonialTrack');
+            const sliderNav = document.getElementById('sliderNav');
+            const dots = sliderNav.querySelectorAll('.slider-dot');
+            let currentSlide = 0;
+            
+            function goToSlide(index) {
+                testimonialTrack.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => goToSlide(index));
+            });
+            
+            // اسلاید خودکار
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % dots.length;
+                goToSlide(currentSlide);
+            }, 5000);
+            
             // حالت تاریک
             const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
             
@@ -1554,6 +1900,19 @@
                     setTimeout(() => {
                         element.style.animationPlayState = 'running';
                     }, 1000);
+                });
+            });
+            
+            // موج‌دار کردن دکمه
+            const waveElements = document.querySelectorAll('.wave');
+            
+            waveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.animation = 'wave 0.5s ease';
+                });
+                
+                element.addEventListener('animationend', () => {
+                    element.style.animation = '';
                 });
             });
         });
